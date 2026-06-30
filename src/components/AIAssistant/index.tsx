@@ -11,6 +11,7 @@ import { initialMessages, suggestions } from "./constants";
 import type { Message } from "./types";
 
 import { API_URL } from "../../config";
+import { Analytics } from "../../analytics";
 
 export default function AIAssistant() {
   // ==========================
@@ -18,26 +19,22 @@ export default function AIAssistant() {
   // ==========================
 
   const [open, setOpen] = useState(false);
-
   const [typing, setTyping] = useState(false);
-
   const [input, setInput] = useState("");
-
   const [messages, setMessages] =
     useState<Message[]>(initialMessages);
 
   // ==========================
-  // Wake Render backend
+  // Wake Render Backend
   // ==========================
 
   useEffect(() => {
     const warmUp = async () => {
       try {
         await fetch(API_URL);
-
-        console.log("✅ Backend is awake");
+        console.log("✅ Backend Awake");
       } catch {
-        console.log("⚠️ Backend sleeping...");
+        console.log("⚠️ Backend Sleeping");
       }
     };
 
@@ -73,6 +70,9 @@ export default function AIAssistant() {
     setInput("");
 
     setTyping(true);
+
+    // Google Analytics Event
+    Analytics.aiQuestion();
 
     try {
       const response = await fetch(`${API_URL}/chat`, {
@@ -125,15 +125,11 @@ export default function AIAssistant() {
 
   return (
     <>
-      {/* Floating Button */}
+      {/* Floating AI Button */}
 
       <motion.button
-        whileHover={{
-          scale: 1.1,
-        }}
-        whileTap={{
-          scale: 0.95,
-        }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
         onClick={() => setOpen(true)}
         className="
           fixed
@@ -161,18 +157,12 @@ export default function AIAssistant() {
       <AnimatePresence>
         {open && (
           <>
-            {/* Overlay */}
+            {/* Background */}
 
             <motion.div
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-              }}
-              exit={{
-                opacity: 0,
-              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
               className="
                 fixed
@@ -183,7 +173,7 @@ export default function AIAssistant() {
               "
             />
 
-            {/* Chat Window */}
+            {/* AI Window */}
 
             <motion.div
               initial={{
