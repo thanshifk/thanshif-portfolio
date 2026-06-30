@@ -89,19 +89,21 @@ export default function SkillPopup({
   damping: 24,
 }}
           className="
-            relative
-            w-full
-            max-w-3xl
-            max-h-[90vh]
-            rounded-3xl
-            border
-            border-slate-700
-            bg-slate-900
-            shadow-2xl
-            overflow-hidden
-            flex
-            flex-col
-          "
+relative
+w-[560px]
+max-w-[95vw]
+h-[720px]
+max-h-[90vh]
+rounded-3xl
+border
+border-slate-700
+bg-slate-900/95
+backdrop-blur-xl
+shadow-[0_30px_80px_rgba(0,0,0,.7)]
+overflow-hidden
+flex
+flex-col
+"
         >
 
           <div className="h-2 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500" />
@@ -133,24 +135,24 @@ duration-300
   className="
     flex-1
     overflow-y-auto
-    p-6 sm:p-8
+    p-6
     scrollbar-thin
     scrollbar-thumb-blue-500
     scrollbar-track-slate-800
   "
 >
 
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-4">
 
               <div
-                className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${skill.color} flex items-center justify-center text-4xl text-white shadow-lg`}
+                className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${skill.color} flex items-center justify-center text-3xl text-white shadow-lg`}
               >
                 {skill.icon}
               </div>
 
               <div>
 
-                <h2 className="text-4xl font-bold">
+                <h2 className="text-3xl font-bold">
                   {skill.name}
                 </h2>
 
@@ -162,7 +164,7 @@ duration-300
 
             </div>
 
-            <div className="mt-8">
+            <div className="mt-6">
 
               <div className="flex justify-between mb-2">
 
@@ -195,12 +197,12 @@ duration-300
 
             </div>
 
-            <p className="mt-8 leading-8 text-slate-300">
+            <p className="mt-6 leading-7 text-slate-300">
               {skill.description}
             </p>
                         {/* Projects */}
 
-            <div className="mt-10">
+            <div className="mt-6">
 
               <h3 className="flex items-center gap-2 text-2xl font-semibold text-blue-400 mb-5">
                 <FaCheckCircle />
@@ -243,7 +245,7 @@ duration-300
             </div>
                         {/* Technologies */}
 
-            <div className="mt-10">
+            <div className="mt-6">
 
               <h3 className="flex items-center gap-2 text-2xl font-semibold text-blue-400 mb-5">
                 <FaCode />
@@ -288,7 +290,7 @@ duration-300
               className="
                 sticky
                 bottom-0
-                mt-10
+                mt-6
                 pt-6
                 pb-2
                 border-t
