@@ -90,10 +90,10 @@ export default function SkillPopup({
 }}
           className="
 relative
-w-[560px]
-max-w-[95vw]
-h-[720px]
-max-h-[90vh]
+w-[460px]
+max-w-[92vw]
+h-[600px]
+max-h-[80vh]
 rounded-3xl
 border
 border-slate-700
@@ -135,24 +135,25 @@ duration-300
   className="
     flex-1
     overflow-y-auto
-    p-6
+    p-4
     scrollbar-thin
     scrollbar-thumb-blue-500
     scrollbar-track-slate-800
   "
 >
+  
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
 
               <div
-                className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${skill.color} flex items-center justify-center text-3xl text-white shadow-lg`}
+                className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${skill.color} flex items-center justify-center text-2xl text-white shadow-lg`}
               >
                 {skill.icon}
               </div>
 
               <div>
 
-                <h2 className="text-3xl font-bold">
+                <h2 className="text-2xl font-bold">
                   {skill.name}
                 </h2>
 
@@ -164,7 +165,7 @@ duration-300
 
             </div>
 
-            <div className="mt-6">
+            <div className="mt-5">
 
               <div className="flex justify-between mb-2">
 
@@ -197,12 +198,12 @@ duration-300
 
             </div>
 
-            <p className="mt-6 leading-7 text-slate-300">
+            <p className="mt-5 leading-7 text-slate-300">
               {skill.description}
             </p>
                         {/* Projects */}
 
-            <div className="mt-6">
+            <div className="mt-5">
 
               <h3 className="flex items-center gap-2 text-2xl font-semibold text-blue-400 mb-5">
                 <FaCheckCircle />
@@ -245,7 +246,7 @@ duration-300
             </div>
                         {/* Technologies */}
 
-            <div className="mt-6">
+            <div className="10">
 
               <h3 className="flex items-center gap-2 text-2xl font-semibold text-blue-400 mb-5">
                 <FaCode />
@@ -290,9 +291,9 @@ duration-300
               className="
                 sticky
                 bottom-0
-                mt-6
-                pt-6
-                pb-2
+                mt-5
+                pt-4
+                pb-1
                 border-t
                 border-slate-700
                 bg-slate-900
@@ -301,7 +302,7 @@ duration-300
                 sm:flex-row
                 justify-between
                 items-center
-                gap-4
+                gap-3
               "
             >
 
