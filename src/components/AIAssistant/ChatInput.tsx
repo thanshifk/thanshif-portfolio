@@ -27,18 +27,33 @@ export default function ChatInput({
     )}px`;
   };
 
+  const handleSend = () => {
+    if (!value.trim()) return;
+
+    onSend();
+
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "44px";
+      textareaRef.current.blur();
+    }
+  };
+
   return (
-    <div className="border-t border-slate-700 bg-slate-900/95 backdrop-blur-xl p-4">
+    <div className="border-t border-slate-700 bg-slate-900/95 backdrop-blur-xl p-4 pb-[calc(env(safe-area-inset-bottom)+16px)]">
 
       <div className="flex items-end gap-3">
 
-        {/* Text Area */}
+        {/* Text Input */}
 
         <textarea
           ref={textareaRef}
           rows={1}
           value={value}
           placeholder="Ask me anything about Thanshif..."
+          enterKeyHint="send"
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck={false}
           onChange={(e) => {
             onChange(e.target.value);
             resize();
@@ -46,7 +61,7 @@ export default function ChatInput({
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
-              onSend();
+              handleSend();
             }
           }}
           className="
@@ -58,19 +73,21 @@ export default function ChatInput({
             bg-slate-800
             px-5
             py-3
+            text-base
             text-white
             placeholder:text-slate-500
             outline-none
-            transition
             focus:border-cyan-500
+            transition
             max-h-36
             overflow-y-auto
           "
         />
 
-        {/* Voice Button (Future Feature) */}
+        {/* Voice Button */}
 
         <motion.button
+          type="button"
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           className="
@@ -82,7 +99,6 @@ export default function ChatInput({
             border-slate-700
             hover:border-cyan-500
             hover:bg-slate-700
-            transition
             flex
             items-center
             justify-center
@@ -95,28 +111,31 @@ export default function ChatInput({
         {/* Send Button */}
 
         <motion.button
-          whileHover={{
-            scale: 1.08,
-            rotate: 5,
+          type="button"
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleSend}
+          onPointerUp={(e) => {
+            e.preventDefault();
+            handleSend();
           }}
-          whileTap={{
-            scale: 0.95,
-          }}
-          onClick={onSend}
-          className="
+          disabled={!value.trim()}
+          className={`
             w-12
             h-12
             rounded-2xl
-            bg-gradient-to-r
-            from-blue-600
-            to-cyan-500
             text-white
-            shadow-lg
-            shadow-cyan-500/30
             flex
             items-center
             justify-center
-          "
+            transition-all
+            duration-200
+            ${
+              value.trim()
+                ? "bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/30 active:scale-95"
+                : "bg-slate-700 opacity-50 cursor-not-allowed"
+            }
+          `}
         >
           <FaPaperPlane />
         </motion.button>
