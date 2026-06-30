@@ -332,4 +332,9 @@ shadow-blue-500/30
 
             </div>
 
-          </div>
+                    </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
