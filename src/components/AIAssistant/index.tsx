@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaRobot } from "react-icons/fa";
 
@@ -13,15 +13,48 @@ import type { Message } from "./types";
 import { API_URL } from "../../config";
 
 export default function AIAssistant() {
+  // ==========================
+  // State
+  // ==========================
+
   const [open, setOpen] = useState(false);
+
   const [typing, setTyping] = useState(false);
+
   const [input, setInput] = useState("");
+
   const [messages, setMessages] =
-  useState<Message[]>(initialMessages);
+    useState<Message[]>(initialMessages);
+
+  // ==========================
+  // Wake Render backend
+  // ==========================
+
+  useEffect(() => {
+    const warmUp = async () => {
+      try {
+        await fetch(API_URL);
+
+        console.log("✅ Backend is awake");
+      } catch {
+        console.log("⚠️ Backend sleeping...");
+      }
+    };
+
+    warmUp();
+  }, []);
+
+  // ==========================
+  // Clear Chat
+  // ==========================
 
   const clearChat = () => {
     setMessages([...initialMessages]);
   };
+
+  // ==========================
+  // Send Message
+  // ==========================
 
   const sendMessage = async (text?: string) => {
     const question = (text ?? input).trim();
@@ -86,13 +119,21 @@ export default function AIAssistant() {
     }
   };
 
+  // ==========================
+  // UI
+  // ==========================
+
   return (
     <>
       {/* Floating Button */}
 
       <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{
+          scale: 1.1,
+        }}
+        whileTap={{
+          scale: 0.95,
+        }}
         onClick={() => setOpen(true)}
         className="
           fixed
@@ -123,9 +164,15 @@ export default function AIAssistant() {
             {/* Overlay */}
 
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
               onClick={() => setOpen(false)}
               className="
                 fixed
@@ -164,7 +211,7 @@ export default function AIAssistant() {
                 w-[560px]
                 max-w-[95vw]
                 h-[820px]
-                max-h-[90vh]
+                max-h-[100dvh]
                 rounded-3xl
                 border
                 border-slate-700
