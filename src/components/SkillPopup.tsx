@@ -49,7 +49,18 @@ export default function SkillPopup({
     <AnimatePresence>
 
       <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-5"
+        className="
+          fixed
+          inset-0
+          z-50
+          flex
+          items-center
+          justify-center
+          bg-black/80
+          backdrop-blur-md
+          p-3
+          sm:p-5
+        "
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -60,8 +71,8 @@ export default function SkillPopup({
           onClick={(e) => e.stopPropagation()}
           initial={{
             opacity: 0,
-            scale: 0.9,
-            y: 30,
+            scale: 0.92,
+            y: 25,
           }}
           animate={{
             opacity: 1,
@@ -70,24 +81,64 @@ export default function SkillPopup({
           }}
           exit={{
             opacity: 0,
-            scale: 0.9,
+            scale: 0.92,
           }}
           transition={{
-            duration: 0.3,
-          }}
-          className="relative w-full max-w-3xl rounded-3xl border border-slate-700 bg-slate-900 shadow-2xl overflow-hidden"
+  type: "spring",
+  stiffness: 260,
+  damping: 24,
+}}
+          className="
+            relative
+            w-full
+            max-w-3xl
+            max-h-[90vh]
+            rounded-3xl
+            border
+            border-slate-700
+            bg-slate-900
+            shadow-2xl
+            overflow-hidden
+            flex
+            flex-col
+          "
         >
 
           <div className="h-2 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500" />
 
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 w-10 h-10 rounded-full bg-slate-800 hover:bg-red-600 transition flex items-center justify-center"
+            className="
+              absolute
+              top-5
+              right-5
+              z-20
+              w-10
+              h-10
+              rounded-full
+              bg-slate-800
+              hover:bg-red-600
+hover:rotate-90
+duration-300
+              transition
+              flex
+              items-center
+              justify-center
+            "
           >
             <FaTimes />
           </button>
 
-          <div className="p-8">
+          <div
+  className="
+    flex-1
+    overflow-y-auto
+    p-6 sm:p-8
+    scrollbar-thin
+    scrollbar-thumb-blue-500
+    scrollbar-track-slate-800
+  "
+>
 
             <div className="flex items-center gap-5">
 
@@ -165,7 +216,13 @@ export default function SkillPopup({
                     whileHover={{
                       scale: 1.03,
                     }}
-                    className="bg-slate-800 rounded-xl p-4 border border-slate-700"
+                    className="
+                      bg-slate-800
+                      rounded-xl
+                      p-4
+                      border
+                      border-slate-700
+                    "
                   >
                     <div className="flex items-center gap-3">
 
@@ -184,8 +241,7 @@ export default function SkillPopup({
               </div>
 
             </div>
-
-            {/* Technologies */}
+                        {/* Technologies */}
 
             <div className="mt-10">
 
@@ -204,9 +260,18 @@ export default function SkillPopup({
                       scale: 1.08,
                     }}
                     whileTap={{
-                      scale: 0.95,
+                      scale: 0.96,
                     }}
-                    className="px-4 py-2 rounded-full bg-blue-600/20 border border-blue-500 text-sm text-blue-300"
+                    className="
+                      px-4
+                      py-2
+                      rounded-full
+                      bg-blue-600/20
+                      border
+                      border-blue-500
+                      text-sm
+                      text-blue-300
+                    "
                   >
                     {tech}
                   </motion.span>
@@ -217,9 +282,26 @@ export default function SkillPopup({
 
             </div>
 
-            {/* Footer */}
+            {/* Sticky Footer */}
 
-            <div className="mt-10 pt-6 border-t border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div
+              className="
+                sticky
+                bottom-0
+                mt-10
+                pt-6
+                pb-2
+                border-t
+                border-slate-700
+                bg-slate-900
+                flex
+                flex-col
+                sm:flex-row
+                justify-between
+                items-center
+                gap-4
+              "
+            >
 
               <p className="text-slate-400 text-sm">
                 Explore more technologies and projects in my portfolio.
@@ -227,7 +309,21 @@ export default function SkillPopup({
 
               <button
                 onClick={onClose}
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:scale-105 transition-all duration-300 font-medium"
+                className="
+px-7
+py-3
+rounded-xl
+bg-gradient-to-r
+from-blue-600
+to-cyan-500
+hover:scale-105
+active:scale-95
+transition-all
+duration-300
+font-medium
+shadow-lg
+shadow-blue-500/30
+"
               >
                 Close
               </button>
@@ -235,12 +331,3 @@ export default function SkillPopup({
             </div>
 
           </div>
-
-        </motion.div>
-
-      </motion.div>
-
-    </AnimatePresence>
-
-  );
-}
