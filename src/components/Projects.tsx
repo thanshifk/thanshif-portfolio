@@ -10,6 +10,8 @@ import {
   FaExternalLinkAlt,
 } from "react-icons/fa";
 
+import { Analytics } from "../analytics";
+
 type ProjectsProps = {
   onSelectProject: (project: string) => void;
 };
@@ -98,7 +100,10 @@ export default function Projects({
 
           <button
             key={item}
-            onClick={() => setFilter(item)}
+            onClick={() => {
+              setFilter(item);
+              Analytics.projectFilter(item);
+            }}
             className={`px-5 py-2 rounded-full font-medium transition-all duration-300 ${
               filter === item
                 ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
@@ -174,26 +179,37 @@ export default function Projects({
                     href={project.github}
                     target="_blank"
                     rel="noreferrer"
+                    onClick={() =>
+                      Analytics.projectGithub(project.title)
+                    }
                     className="w-11 h-11 rounded-xl bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition"
                   >
                     <FaGithub />
                   </a>
 
                   {project.demo && (
+
                     <a
                       href={project.demo}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={() =>
+                        Analytics.projectDemo(project.title)
+                      }
                       className="w-11 h-11 rounded-xl bg-slate-800 hover:bg-green-600 flex items-center justify-center transition"
                     >
                       <FaExternalLinkAlt />
                     </a>
+
                   )}
 
                 </div>
 
                 <button
-                  onClick={() => onSelectProject(project.id)}
+                  onClick={() => {
+                    Analytics.projectClick(project.title);
+                    onSelectProject(project.id);
+                  }}
                   className="flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold"
                 >
                   View Details
